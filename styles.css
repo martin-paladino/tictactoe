@@ -1,0 +1,48 @@
+body {
+height: 100vh;
+margin: 0;
+}
+
+.container {
+    display: grid;
+    width: 60%;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 50px repeat(3, 1fr) 50px;
+    margin: auto;
+    height: 100vh;
+    align-content: center;
+}
+
+.cell {
+    display: table-cell;
+    background-color: blue;
+    border: white;
+    border: 1px solid black;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 12vw;
+}
+
+#prueba {
+    grid-column: 1/4;
+    grid-row: 5/6;
+    justify-self: center;
+    align-self: center;
+}
+
+#message {
+    grid-column: 1/4;
+    grid-row: 1/2;
+    justify-self: center;
+    align-self: center;
+    font-size: 2vw;
+}
+
+#reset {
+    visibility: hidden;
+}
+
+button {
+    background-color: #0077C0;
+    color: white;
+}
