@@ -46,3 +46,18 @@ button {
     background-color: #0077C0;
     color: white;
 }
+
+@media only screen and (max-width: 600px) {
+    .container {
+        display: grid;
+        width: 95%;
+        grid-template-columns: repeat(3, 1fr);
+        margin: auto;
+        height: 65%;
+        align-content: center;
+    }
+
+    #message {
+        font-size: 10vw;
+    }
+}
