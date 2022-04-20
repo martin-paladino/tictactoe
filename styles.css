@@ -1,6 +1,7 @@
 body {
 height: 100vh;
 margin: 0;
+background: linear-gradient(360deg, #000000d6, #01c1ff96); 
 }
 
 .container {
@@ -14,13 +15,25 @@ margin: 0;
 }
 
 .cell {
-    display: table-cell;
-    background-color: blue;
-    border: white;
-    border: 1px solid black;
-    text-align: center;
-    vertical-align: middle;
-    font-size: 12vw;
+    font-size: 10vw;
+    background: transparent;
+    border-right: 5px solid; 
+    border-bottom: 5px solid; 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center; 
+    cursor: pointer;
+}
+.cell:hover{
+    background: radial-gradient(#1f58d9a3 0, transparent 50%);
+}
+
+#\33, #\36, #\39{
+    border-right: none;
+}
+#\37, #\38, #\39{
+    border-bottom: none;
 }
 
 #prueba {
@@ -43,8 +56,17 @@ margin: 0;
 }
 
 button {
-    background-color: #0077C0;
-    color: white;
+    background-color: #0a5381;
+    color: whitesmoke;
+    border-radius: 4px;
+    border: none;
+    box-shadow: 1px 2px 7px black;
+    font-size: 17px;
+    padding: 6px;
+}
+
+button:hover{
+    cursor: pointer;
 }
 
 @media only screen and (max-width: 600px) {
