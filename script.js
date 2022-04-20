@@ -5,6 +5,7 @@ const singlePlayButton = document.querySelector("#singlePlay");
 const winPossibilities = [[1, 2, 3], [4, 5, 6], [7, 8, 9], [1, 4, 7], [2, 5, 8], [3, 6, 9], [1, 5, 9], [3, 5, 7]];
 let singlePlay = false;
 let playerATurn = false;
+let gameFinished = false;
 let choicesPlayerA = [];
 let choicesPlayerB = [];
 
@@ -14,21 +15,19 @@ gameBoard.addEventListener("click", (e) => {
     if (!e.target.textContent) {
         playerATurn = !playerATurn;
         !singlePlay && styleSinglePlayButton("#D53711", true);
-        messageElement.textContent = "";
+        if(!gameFinished) messageElement.textContent = "";
         if (!singlePlay) {
-            e.target.textContent = playerATurn ? "X" : "O";
-            playerATurn ? choicesPlayerA.push(Number(e.target.id)) : choicesPlayerB.push(Number(e.target.id));
-            if (choicesPlayerA.length >= 3 || choicesPlayerB.length >= 3) playerATurn ? checkWinner("X") : checkWinner("O");
+            if(!gameFinished) playerATurn ? play("X", choicesPlayerA, e) : play("O", choicesPlayerB, e);
+            if ((choicesPlayerA.length >= 3 || choicesPlayerB.length >= 3) && !gameFinished) playerATurn ? checkWinner("X") : checkWinner("O");
         }
         if (singlePlay && playerATurn) {
-            e.target.textContent = "X";
-            choicesPlayerA.push(Number(e.target.id));
-            choicesPlayerA.length >= 3 && playerATurn && checkWinner("X");
+            !gameFinished && play("X", choicesPlayerA, e);
+            (choicesPlayerA.length >= 3 && playerATurn && !gameFinished) && checkWinner("X");
             playerATurn = !playerATurn;
-            selfPlay()
+            !gameFinished && selfPlay();
         }
     } else {
-        if(e.target.className === "cell") messageElement.textContent = "Este casillero ya fue clickeado. Selecciona otro.";
+        if(e.target.className === "cell" && !gameFinished) messageElement.textContent = "Este casillero ya fue clickeado. Selecciona otro.";
     }
 });
 
@@ -36,6 +35,7 @@ resetButton.addEventListener("click", (e) => {
     e.preventDefault();
     playerATurn = false;
     singlePlay = false;
+    gameFinished = false;
     choicesPlayerA = [];
     choicesPlayerB = [];
     styleSinglePlayButton("#0077C0", false);
@@ -58,6 +58,7 @@ const checkWinner = (char) => {
         for (let choice of choices) winPossibility.includes(choice) && hits.push(choice);
         if (hits.length === 3) {
             messageElement.textContent = `Ganó el ${playerName}!`;
+            gameFinished = true;
             break;
         }
         if (choices.length === 5 && hits.lenght !== 3) {
@@ -66,8 +67,14 @@ const checkWinner = (char) => {
     }
 };
 
+const play = (char, choices, e = e) => {
+    e.target.textContent = char;
+    choices.push(Number(e.target.id));
+};
+
 const selfPlay = () => {
     let cellPosition;
+    let positionToDraw;
     while (!choicesPlayerA.includes(cellPosition) && choicesPlayerB.length !== 4) {
         if (choicesPlayerB.includes(cellPosition)) {
             cellPosition = 0;
@@ -78,8 +85,9 @@ const selfPlay = () => {
             cellPosition = 0;
             continue;
         }
+        positionToDraw = cellPosition;
+        setTimeout(() => document.getElementById(positionToDraw).textContent = "O", 500);
         choicesPlayerB.push(cellPosition);
-        document.getElementById(cellPosition).textContent = "O";
         choicesPlayerB.length >= 3 && !playerATurn && checkWinner("O");
     }
 };
