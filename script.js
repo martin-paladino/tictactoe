@@ -14,7 +14,7 @@ gameBoard.addEventListener("click", (e) => {
     
     if (!e.target.textContent) {
         playerATurn = !playerATurn;
-        !singlePlay && styleSinglePlayButton("#D53711", true);
+        !singlePlay && styleSinglePlayButton("#0a5381", true);
         if(!gameFinished) messageElement.textContent = "";
         if (!singlePlay) {
             if(!gameFinished) playerATurn ? play("X", choicesPlayerA, e) : play("O", choicesPlayerB, e);
