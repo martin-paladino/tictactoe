@@ -14,7 +14,7 @@ gameBoard.addEventListener("click", e => {
 
     if (!e.target.textContent) {
         playerATurn = !playerATurn;
-        !singlePlay && styleSinglePlayButton("#D53711", true);
+        !singlePlay && styleSinglePlayButton("#0a5381", true);
         if (!gameFinished) messageElement.textContent = "";
         if (singlePlay) {
             !gameFinished && play("X", choicesPlayerA, e);
@@ -35,7 +35,12 @@ resetButton.addEventListener("click", e => {
     gameFinished = false;
     choicesPlayerA = [];
     choicesPlayerB = [];
-    styleSinglePlayButton("#0077C0", false);
+    styleSinglePlayButton("#0a5381", false);
+    resetButton.style.background = "#053756f5"
+    resetButton.style.boxShadow = "none";
+    singlePlayButton.style.boxShadow = "1px 2px 7px black";
+    setTimeout(function(){
+        resetButton.style.background = "#0a5381", resetButton.style.boxShadow = "1px 2px 7px black"}, 300);
     messageElement.textContent = "";
     document.querySelectorAll(".cell").forEach(cell => cell.textContent = "");
 });
@@ -43,7 +48,8 @@ resetButton.addEventListener("click", e => {
 singlePlayButton.addEventListener("click", e => {
     e.preventDefault();
     singlePlay = true;
-    styleSinglePlayButton("#3DC863", true);
+    styleSinglePlayButton("#053756f5", true);
+    singlePlayButton.style.boxShadow = "none";
 })
 
 const checkWinner = char => {
