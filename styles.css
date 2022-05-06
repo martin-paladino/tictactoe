@@ -52,7 +52,7 @@ background: linear-gradient(360deg, #000000d6, #01c1ff96);
 }
 
 #reset {
-    visibility: hidden;
+    display: none;
 }
 
 button {
